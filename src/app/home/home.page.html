@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      GET DISTANCE
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <!--
+  <ion-searchbar [(ngModel)]="autocomplete.input" (ionInput)="updateSearchResults()" placeholder="Search for a place"></ion-searchbar>
+  <ion-list [hidden]="autocompleteItems.length == 0">
+    <ion-item *ngFor="let item of autocompleteItems" tappable (click)="selectSearchResult(item)">
+      {{ item.description }}
+    </ion-item>
+  </ion-list>
+  -->
+
+  <ion-item>
+    <ion-label color="primary" position="stacked">From</ion-label>
+    <ion-input color="primary" [(ngModel)]="distance.from"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label color="primary" position="stacked">To</ion-label>
+    <ion-input color="primary" [(ngModel)]="distance.to"></ion-input>
+  </ion-item>
+
+  <ion-row center>
+    <ion-col text-center>
+      <ion-button shape="round" fill="outline" (click)="getDistance()">GET</ion-button>
+    </ion-col>
+  </ion-row>
+
+  <div id="map_canvas"></div>
+
+  <br/>
+  <ion-card *ngIf="status">
+    <ion-card-header>
+      <ion-card-title><ion-icon name="car"></ion-icon> Direction Details</ion-card-title>
+      <ion-card-subtitle>Starting Point: {{ startPoint }}</ion-card-subtitle>
+      <ion-card-subtitle>Destination Point: {{ destinationPoint }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+        <ion-icon name="qr-scanner"></ion-icon> Distance: {{ distanceValue }}
+        <br/>
+        <ion-icon name="time"></ion-icon> Duration: {{ durationValue }}
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

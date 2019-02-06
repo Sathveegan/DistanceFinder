@@ -48,8 +48,8 @@ export class HomePage implements OnInit {
     this.map = GoogleMaps.create('map_canvas', {
       camera: {
         target: {
-          "lat": 6.9218374,
-          "lng": 79.8211859
+          "lat": 6.9277556,
+          "lng": 79.8904084
         },
         zoom: 18,
         tilt: 30
@@ -121,17 +121,17 @@ export class HomePage implements OnInit {
       travelMode: 'DRIVING'
     }, (response, status) => {
       if (status === 'OK') {
-        this.distanceValue = response.routes[0].legs[0].steps[0].duration.text;
-        this.durationValue = response.routes[0].legs[0].steps[0].distance.text;
+        this.distanceValue = response.routes[0].legs[0].distance.text;
+        this.durationValue = response.routes[0].legs[0].duration.text;
 
-        let decode = google.maps.geometry.encoding.decodePath(response.routes[0].overview_polyline);
-        let lines = [];
+        let poly_path = response.routes[0].overview_path;
+        let paths = [];
 
-        for (let i of decode) {
-          lines.push({ "lat": i.lat(), "lng": i.lng() });
+        for (let i of poly_path) {
+          paths.push({ "lat": i.lat(), "lng": i.lng() });
         }
         let polyline: Polyline = this.map.addPolylineSync({
-          points: lines,
+          points: paths,
           color: '#ffffff',
           width: 4,
           geodesic: true
